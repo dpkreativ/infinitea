@@ -1,5 +1,6 @@
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
+import BlurImage from './BlurImage';
 
 export default function Card({
   creditUrl,
@@ -32,21 +33,23 @@ export default function Card({
 
   return (
     <div className="shadow-lg rounded-xl p-2 w-full bg-white" ref={cardRef}>
-      <div className="w-full h-96 relative overflow-hidden rounded-xl">
-        <Image
-          src={imgSrc}
-          fill
-          sizes=""
-          style={{ objectFit: 'cover' }}
-          alt={imgAlt}
-          lazy="true"
-        />
-      </div>
-      <div className="rounded-b-xl p-4">
-        <a href={creditUrl}>
-          Credit:<span> {shotBy}</span>
-        </a>
-      </div>
+      <a href={creditUrl} target="_blank">
+        <div className="w-full h-96 relative overflow-hidden rounded-xl">
+          <Image
+            src={imgSrc}
+            fill
+            sizes=""
+            style={{ objectFit: 'cover' }}
+            alt={imgAlt}
+            lazy="true"
+            placeholder="blur"
+            blurDataURL={BlurImage}
+          />
+        </div>
+        <div className="rounded-b-xl p-4">
+          Credit:<span className="font-semibold"> {shotBy}</span>
+        </div>
+      </a>
     </div>
   );
 }

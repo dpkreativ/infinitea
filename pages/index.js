@@ -31,7 +31,7 @@ export default function Home() {
     fetchImages();
   }, [page]);
 
-  // Render
+  // ------- Render -------
   return (
     <>
       <Head>
@@ -43,18 +43,17 @@ export default function Home() {
 
       {/* Home */}
       <HomeLayout>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {images.map((image, index) => (
+          <Card
+            key={image.id}
+            imgSrc={image.urls.regular}
+            imgAlt={image.alt_description}
+            shotBy={image.user.name}
+            creditUrl={image.links.html}
+            isLast={index === images.length - 1}
+            newLimit={() => setPage(page + 1)}
+          />
+        ))}
       </HomeLayout>
     </>
   );
